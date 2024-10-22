@@ -39,7 +39,6 @@ for a in range(len(veta)):
         posledna_medzera=sucasna_medzera
     elif a == (len(veta)-1):
         sucasna_medzera=a+1
-        count_slovo +=1
         print(veta[(posledna_medzera+1):sucasna_medzera]+" - "+str(sucasna_medzera-(posledna_medzera+1)))
         if (sucasna_medzera-(posledna_medzera+1))>dlzka_max_slova:
             dlzka_max_slova=(sucasna_medzera-(posledna_medzera+1))
