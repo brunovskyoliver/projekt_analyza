@@ -1,7 +1,7 @@
 veta=input("Zadaj vetu: ")
 
 ###### !!! cvicna veta !!! #######
-# veta = "Katka a Zdenka su sestry."
+#veta = "Katka a Zdenka su sestry."
 
 # konštanty
     # znaky a písmená
@@ -50,7 +50,36 @@ def vypocitajSifra2(iVeta):
     return lSifra
 
 def vypocitajSifra3(iVeta):
-    return ""
+    import random
+    sos: int = -1 # sos -> start of sequence -> najde prve pismeno v slove
+    eos: int = 0 # eos -> end of sequence -> najde prazdny string " " medzeru -> eos - 1 bude teda posledne pismeno v slove
+    wordCount: int = 0
+    result: str = ""
+    for i in range(len(iVeta)):
+        if iVeta[i] == " " or iVeta[i] in intrepZnamienka:
+            eos = i
+            wordCount += 1
+            length = eos - sos - 1
+            wordFirst = iVeta[sos+1:sos+2]
+            wordLast = iVeta[eos-1:eos]
+            if length > 2:
+                wordShuffled = wordFirst
+                middleChars = iVeta[sos+2:eos-1]
+                remainingChars = middleChars # temp string, lebo nepozname listy ani tuples :(
+                while len(remainingChars)>0:
+                    charIndex = random.randint(0,len(remainingChars)-1)
+                    wordShuffled += remainingChars[charIndex]
+                    remainingChars = remainingChars[:charIndex] + remainingChars[charIndex+1:]
+                wordShuffled += wordLast
+            else:
+                wordShuffled = iVeta[sos+1:eos]
+            if i <= len(iVeta) - 1:
+                if iVeta[i] in intrepZnamienka:
+                    result += wordShuffled + iVeta[i]
+                else:
+                    result += wordShuffled + " "
+            sos = eos
+    return result
 
 def komprimuj(iVeta):
     return ""
@@ -108,18 +137,7 @@ for a in range(len(veta)):
             poradie_max_slova = count_slovo
         if len(veta[(posledna_medzera+1):sucasna_medzera]) == dlzka_max_slova:
             najdlhsie_slova += veta[(posledna_medzera+1):sucasna_medzera]
-        posledna_medzera=sucasna_medzera
-    elif a == (len(veta)-1): # SJ - spravna veta ma na konci ".?!", preto tento elif nebude nikdy vyuzity
-        sucasna_medzera=a+1
-        print(veta[(posledna_medzera+1):sucasna_medzera]+" - "+str(sucasna_medzera-(posledna_medzera+1)))
-        if (sucasna_medzera-(posledna_medzera+1))>dlzka_max_slova:
-            najdlhsie_slova = ""
-            dlzka_max_slova=(sucasna_medzera-(posledna_medzera+1))
-            poradie_max_slova = count_slovo
-        if len(veta[(posledna_medzera+1):sucasna_medzera]) == dlzka_max_slova:
-            najdlhsie_slova += veta[(posledna_medzera+1):sucasna_medzera]
-        posledna_medzera=sucasna_medzera
-    
+        posledna_medzera=sucasna_medzera 
 
 print("Dĺžka najdlhšieho slova: "+str(dlzka_max_slova))
 print("Poradové číslo najdlhšieho slova: "+ str(poradie_max_slova))
