@@ -27,23 +27,36 @@ posledna_medzera=-1
 sucasna_medzera=0
 dlzka_max_slova=0
 poradie_max_slova=0
-count_slovo = 1
+count_slovo = 0
+najdlhsie_slova = ""
+
 for a in range(len(veta)):
     if veta[a]==" " or veta[a] in ".?!":
         sucasna_medzera=a
         count_slovo +=1
         print(veta[(posledna_medzera+1):sucasna_medzera]+" - "+str(sucasna_medzera-(posledna_medzera+1)))
         if (sucasna_medzera-(posledna_medzera+1))>dlzka_max_slova:
+            najdlhsie_slova = ""
             dlzka_max_slova=(sucasna_medzera-(posledna_medzera+1))
             poradie_max_slova = count_slovo
+        if len(veta[(posledna_medzera+1):sucasna_medzera]) == dlzka_max_slova:
+            najdlhsie_slova += veta[(posledna_medzera+1):sucasna_medzera]
         posledna_medzera=sucasna_medzera
     elif a == (len(veta)-1):
         sucasna_medzera=a+1
         print(veta[(posledna_medzera+1):sucasna_medzera]+" - "+str(sucasna_medzera-(posledna_medzera+1)))
         if (sucasna_medzera-(posledna_medzera+1))>dlzka_max_slova:
+            najdlhsie_slova = ""
             dlzka_max_slova=(sucasna_medzera-(posledna_medzera+1))
             poradie_max_slova = count_slovo
+        if len(veta[(posledna_medzera+1):sucasna_medzera]) == dlzka_max_slova:
+            najdlhsie_slova += veta[(posledna_medzera+1):sucasna_medzera]
         posledna_medzera=sucasna_medzera
     
+
 print("Dĺžka najdlhšieho slova: "+str(dlzka_max_slova))
-print("Poradie najdlhsieho slova "+ str(poradie_max_slova)) 
+print("Poradové číslo najdlhšieho slova: "+ str(poradie_max_slova))
+print("Slová s najväčšou dĺžkou: ")
+for i in range(int(len(najdlhsie_slova)/dlzka_max_slova)):
+    print(najdlhsie_slova[i*dlzka_max_slova:(i*dlzka_max_slova+dlzka_max_slova)])
+
