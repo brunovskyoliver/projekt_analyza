@@ -21,7 +21,7 @@ for a in range(len(veta)):
 print("Počet slov vo vete: "+str(pocet_slov))
 print("Počet slov začínajúcich na samohlásku: "+str(slova_na_samohlasku))
 print("Počet slov začínajúcich na spoluhlásku: "+str(slova_na_spoluhlasku))
-print("Dĺžky slov vo vete:")
+print("Dĺžky slov vo vete:") # tst01
 
 posledna_medzera=-1
 sucasna_medzera=0
