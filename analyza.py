@@ -22,7 +22,7 @@ print("Počet slov vo vete: "+str(pocet_slov))
 print("Počet slov začínajúcich na samohlásku: "+str(slova_na_samohlasku))
 print("Počet slov začínajúcich na spoluhlásku: "+str(slova_na_spoluhlasku))
 print("Dĺžky slov vo vete:") # tst01
-
+#test02
 posledna_medzera=-1
 sucasna_medzera=0
 dlzka_max_slova=0
