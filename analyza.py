@@ -83,7 +83,9 @@ def komprimuj(iVeta):
         if pismeno == " ":
             lVelke = True if not lVelke else False
         else:
-            if ord(pismeno) >= cPrveMalePismeno and lVelke:
+            if pismeno in cIntrepZnamienka:
+                lSifra += pismeno
+            elif ord(pismeno) >= cPrveMalePismeno and lVelke:
                 lSifra += chr(ord(pismeno) - cRozdielHodnotPismen)
             elif ord(pismeno) < cPrveMalePismeno and not lVelke:
                 lSifra += chr(ord(pismeno) + cRozdielHodnotPismen)
@@ -120,7 +122,7 @@ def vypocitajSifra4(iVeta: str, iNtica: int):
         elif (i+1) % iNtica == 0:
             lSifra += iVeta[i:lPoslednySek:-1]
             lPoslednySek = i
-    for pismeno in lSifra:
+    for pismeno in lSifra: # napíšme všetky písmená veľkým ako je v príklade zadania..
         if ord(pismeno) >= cPrveMalePismeno:
             lNoveSlovo += chr(ord(pismeno)-cRozdielHodnotPismen)
         else:
