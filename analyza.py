@@ -94,7 +94,7 @@ def komprimuj(iVeta):
 def zamenaRetazca(iVeta, iRetazec):
     lVeta = ""
     lPoslednaNahrada: int = 0
-    if iRetazec in iVeta:
+    if iRetazec != "" and iRetazec in iVeta:
         for i in range(len(iVeta)):
             if i < lPoslednaNahrada:
                 continue
@@ -108,14 +108,24 @@ def zamenaRetazca(iVeta, iRetazec):
     return lVeta
 
 def vypocitajSifra4(iVeta: str, iNtica: int):
-    lRetazec = ""
+    lPoslednySek: int = 0
     lSifra = ""
+    lNoveSlovo = ""
     for i in range(len(iVeta)):
-        if i+iNtica > len(iVeta)-1: # interp znamienko
-            lSifra += iVeta[len(iVeta)-1:i:-1]
-            break
-        elif i%(iNtica) == 0:
-            lSifra += iVeta[i+iNtica:i:-1]
+        if i == len(iVeta) - 1:
+            lSifra += iVeta[-2:lPoslednySek:-1]
+        elif (i+1) % iNtica == 0 and lPoslednySek == 0:
+            lSifra += iVeta[i::-1]
+            lPoslednySek = i
+        elif (i+1) % iNtica == 0:
+            lSifra += iVeta[i:lPoslednySek:-1]
+            lPoslednySek = i
+    for pismeno in lSifra:
+        if ord(pismeno) >= cPrveMalePismeno:
+            lNoveSlovo += chr(ord(pismeno)-cRozdielHodnotPismen)
+        else:
+            lNoveSlovo += pismeno
+    lSifra = lNoveSlovo
     lSifra += iVeta[-1]
     return lSifra
 
@@ -198,7 +208,7 @@ def poctySlov(iVeta):
 def mainloop():
     veta = input("Zadaj vetu: ")
     ###### !!! cvicna veta !!! #######
-    veta = "Katka a Zdenka su sestry."
+    # veta = "Katka a Zdenka su sestry."
     poctySlov(iVeta=veta)
     sifry(iVeta=veta)
 
