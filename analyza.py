@@ -1,7 +1,7 @@
 veta=input("Zadaj vetu: ")
 
 ###### !!! cvicna veta !!! #######
-#veta = "Katka a Zdenka su sestry."
+veta = "Katka a Zdenka su sestry."
 
 # konštanty
     # znaky a písmená
@@ -66,7 +66,11 @@ def vypocitajSifra3(iVeta):
                 wordShuffled = wordFirst
                 middleChars = iVeta[sos+2:eos-1]
                 remainingChars = middleChars # temp string, lebo nepozname listy ani tuples :(
-                while len(remainingChars)>0:
+                # while len(remainingChars)>0:
+                #     charIndex = random.randint(0,len(remainingChars)-1)
+                #     wordShuffled += remainingChars[charIndex]
+                #     remainingChars = remainingChars[:charIndex] + remainingChars[charIndex+1:]
+                for i in range(len(remainingChars)):
                     charIndex = random.randint(0,len(remainingChars)-1)
                     wordShuffled += remainingChars[charIndex]
                     remainingChars = remainingChars[:charIndex] + remainingChars[charIndex+1:]
@@ -144,5 +148,6 @@ print("Poradové číslo najdlhšieho slova: "+ str(poradie_max_slova))
 print("Slová s najväčšou dĺžkou: ")
 for i in range(int(len(najdlhsie_slova)/dlzka_max_slova)):
     print(najdlhsie_slova[i*dlzka_max_slova:(i*dlzka_max_slova+dlzka_max_slova)])
+
 
 sifry(iVeta=veta)
